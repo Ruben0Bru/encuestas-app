@@ -3,6 +3,7 @@
 import { createClient } from '@/utils/supabase/server'
 import { revalidatePath } from 'next/cache'
 
+// Función auxiliar para generar códigos
 function generateCourseCode() {
   const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789'
   let code = ''
@@ -12,7 +13,7 @@ function generateCourseCode() {
   return code
 }
 
-// AGREGADO: prevState: any
+// Acción para CREAR curso
 export async function createCourse(prevState: any, formData: FormData) {
   const supabase = await createClient()
   
@@ -41,4 +42,29 @@ export async function createCourse(prevState: any, formData: FormData) {
 
   revalidatePath('/dashboard/teacher')
   return { success: true }
+}
+
+// Acción para BORRAR curso (NUEVA)
+export async function deleteCourse(courseId: string) {
+  const supabase = await createClient()
+  
+  // 1. Verificar usuario
+  const { data: { user } } = await supabase.auth.getUser()
+  if (!user) return { error: 'No autorizado' }
+
+  // 2. Borrar curso (Solo si pertenece al usuario actual)
+  const { error } = await supabase
+    .from('courses')
+    .delete()
+    .eq('id', courseId)
+    .eq('teacher_id', user.id) // Candado de seguridad
+
+  if (error) {
+    console.error("Error al borrar curso:", error)
+    return { error: 'No se pudo borrar el curso. Inténtalo de nuevo.' }
+  }
+
+  // 3. Actualizar la vista del dashboard
+  revalidatePath('/dashboard/teacher')
+  return { success: true, message: 'Curso eliminado correctamente.' }
 }

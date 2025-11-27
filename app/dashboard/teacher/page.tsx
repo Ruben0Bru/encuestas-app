@@ -2,12 +2,12 @@ import { createClient } from '@/utils/supabase/server'
 import { Users, ArrowRight, BookDashed } from 'lucide-react'
 import Link from 'next/link'
 import CreateCourseForm from './CreateCourseForm'
+import DeleteCourseButton from './DeleteCourseButton' // <--- IMPORTAR
 
 export default async function TeacherDashboard() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Si no hay usuario, el layout lo redirigirá, pero por seguridad:
   if (!user) return null 
 
   const { data: courses } = await supabase
@@ -17,7 +17,7 @@ export default async function TeacherDashboard() {
     .order('created_at', { ascending: false })
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-8 animate-fade-in">
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 border-b border-slate-200 pb-8">
         <div>
           <h1 className="text-4xl font-extrabold tracking-tight text-slate-900">Mis Cursos</h1>
@@ -46,9 +46,12 @@ export default async function TeacherDashboard() {
                   <span className="inline-flex items-center rounded-full bg-yellow-400/10 px-3 py-1 text-xs font-bold text-yellow-400 ring-1 ring-inset ring-yellow-400/20">
                     CÓDIGO: <span className="font-mono ml-1 text-sm">{course.access_code}</span>
                   </span>
+                  
+                  {/* BOTÓN DE BORRAR (Posicionado discretamente) */}
+                  <DeleteCourseButton courseId={course.id} />
+
                 </div>
                 <h3 className="text-2xl font-bold leading-tight text-slate-900 group-hover:text-yellow-400 transition-colors">
-                  {/* OJO: Verifica que esta ruta exista o la estemos creando */}
                   <Link href={`/dashboard/teacher/courses/${course.id}`}>
                     <span className="absolute inset-0" />
                     {course.name}
