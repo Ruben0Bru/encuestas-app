@@ -122,32 +122,44 @@ export default async function StudentDetailPage({ params }: PageProps) {
             <History className="h-6 w-6 text-slate-400" /> Historial de Actividades
         </h3>
         
-        {validAttempts.length === 0 ? (
-            <div className="text-center py-12 text-slate-400 italic">No ha realizado actividades en este curso.</div>
-        ) : (
-            <div className="divide-y divide-slate-100">
-                {validAttempts.map((attempt: any) => {
-                    const percentage = Math.round((attempt.score / attempt.total_questions) * 100);
-                    return (
-                        <div key={attempt.id} className="py-4 flex items-center justify-between hover:bg-slate-50 px-2 rounded-lg transition-colors">
-                            <div className="flex items-center gap-3">
-                                <div className="p-2 bg-slate-100 rounded-lg text-slate-500"><BookOpen className="h-4 w-4" /></div>
-                                <div>
-                                    <p className="font-bold text-slate-900">{attempt.surveys?.title || "Encuesta"}</p>
-                                    <p className="text-xs text-slate-500">
-                                        {new Date(attempt.finished_at).toLocaleDateString()}
-                                    </p>
-                                </div>
-                            </div>
-                            <div className="text-right">
-                                <span className="block font-bold text-slate-800 text-lg">{percentage}%</span>
-                                <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">{attempt.mastery_level}</span>
-                            </div>
-                        </div>
-                    )
-                })}
+        {validAttempts.map((attempt: any) => {
+    const percentage = Math.round((attempt.score / attempt.total_questions) * 100);
+    return (
+        // CAMBIO: Usamos Link para ir a la página de revisión
+        <Link 
+            key={attempt.id} 
+            href={`/dashboard/teacher/courses/${courseId}/students/${studentId}/review/${attempt.id}`}
+            className="py-4 flex items-center justify-between hover:bg-slate-50 px-3 rounded-xl transition-all group cursor-pointer border border-transparent hover:border-slate-100 hover:shadow-sm"
+        >
+            <div className="flex items-center gap-4">
+                <div className="p-2 bg-slate-100 rounded-lg text-slate-500 group-hover:bg-[#2E9FFB]/10 group-hover:text-[#2E9FFB] transition-colors">
+                    <BookOpen className="h-5 w-5" />
+                </div>
+                <div>
+                    <p className="font-bold text-slate-900 group-hover:text-[#2E9FFB] transition-colors text-lg">
+                        {attempt.surveys.title}
+                    </p>
+                    <p className="text-xs text-slate-500 font-medium">
+                        {/* Usamos ?. para preguntar si existe antes de leer, y || para poner un texto por defecto */}
+{attempt.surveys?.topics?.name || "Tema General"} • {new Date(attempt.finished_at).toLocaleDateString()}
+                    </p>
+                </div>
             </div>
-        )}
+            <div className="text-right flex items-center gap-4">
+                <div>
+                    <span className="block font-black text-slate-800 text-xl">{percentage}%</span>
+                    <span className="text-[10px] uppercase font-bold text-slate-400 bg-slate-100 px-2 py-0.5 rounded-full">
+                        {attempt.mastery_level}
+                    </span>
+                </div>
+                {/* Flecha visual */}
+                <div className="text-slate-300 group-hover:text-[#2E9FFB] group-hover:translate-x-1 transition-all">
+                    →
+                </div>
+            </div>
+        </Link>
+    )
+})}
       </div>
     </div>
   )

@@ -1,5 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
-import { BookOpen, Calendar, CheckCircle2, XCircle, AlertCircle } from 'lucide-react'
+import { BookOpen, Calendar, CheckCircle2, XCircle, AlertCircle, ChevronRight } from 'lucide-react'
+import Link from 'next/link' // <--- 1. IMPORTAR LINK
 import clsx from 'clsx'
 
 export default async function StudentHistoryPage() {
@@ -19,7 +20,6 @@ export default async function StudentHistoryPage() {
     .order('finished_at', { ascending: false })
 
   const allAttempts = attemptsData || []
-  // Filtramos solo los intentos terminados
   const history = allAttempts.filter((a: any) => a.finished_at !== null && a.total_questions > 0)
 
   return (
@@ -50,8 +50,12 @@ export default async function StudentHistoryPage() {
                     const isPassed = percentage >= 60; 
 
                     return (
-                        <div key={attempt.id} className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between hover:bg-slate-50 transition-colors gap-4">
-                            
+                        // 2. CAMBIAMOS EL DIV POR UN LINK
+                        <Link 
+                            key={attempt.id} 
+                            href={`/dashboard/student/history/${attempt.id}`}
+                            className="p-6 md:p-8 flex flex-col md:flex-row md:items-center justify-between hover:bg-slate-50 transition-colors gap-4 group cursor-pointer"
+                        >
                             <div className="flex items-start gap-4">
                                 <div className={clsx(
                                     "mt-1 p-2 rounded-full", 
@@ -60,7 +64,10 @@ export default async function StudentHistoryPage() {
                                     {isPassed ? <CheckCircle2 className="h-5 w-5" /> : <XCircle className="h-5 w-5" />}
                                 </div>
                                 <div>
-                                    <h4 className="text-lg font-bold text-slate-900">{attempt.surveys?.title}</h4>
+                                    {/* Agregamos efecto hover al título */}
+                                    <h4 className="text-lg font-bold text-slate-900 group-hover:text-[#2E9FFB] transition-colors">
+                                        {attempt.surveys?.title}
+                                    </h4>
                                     <div className="flex items-center gap-4 text-sm text-slate-500 mt-1">
                                         <span className="flex items-center gap-1">
                                             <BookOpen className="h-3 w-3" /> {attempt.surveys?.topics?.name}
@@ -88,9 +95,11 @@ export default async function StudentHistoryPage() {
                                         {attempt.mastery_level}
                                     </span>
                                 </div>
+                                {/* Flechita visual */}
+                                <ChevronRight className="h-5 w-5 text-slate-300 group-hover:text-[#2E9FFB] transition-colors" />
                             </div>
 
-                        </div>
+                        </Link>
                     )
                 })}
             </div>
