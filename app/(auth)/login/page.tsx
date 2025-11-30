@@ -21,10 +21,10 @@ export default function LoginPage() {
                 <Sparkles className="w-8 h-8 text-[#FBE02E]" />
             </div>
             <h2 className="text-4xl font-extrabold text-slate-900 mb-4 leading-tight">
-                Bienvenido a la <span className="text-[#2E9FFB]">nueva era</span> educativa
+                Bienvenido a <span className="text-[#FBE02E]">PEAI</span>
             </h2>
             <p className="text-lg text-slate-600">
-                Gestiona, aprende y crece con herramientas diseñadas para potenciar tu experiencia académica.
+                Tu plataforma educativa para gestionar, aprender y crecer.
             </p>
         </div>
       </div>
@@ -60,7 +60,7 @@ export default function LoginPage() {
                   name="email"
                   type="email"
                   required
-                  className="block w-full rounded-xl border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#2E9FFB] focus:ring-[#2E9FFB] sm:text-sm transition-all shadow-sm hover:border-[#2E9FFB]/50"
+                  className="block w-full rounded-xl border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#FBE02E] focus:ring-[#FBE02E] sm:text-sm transition-all shadow-sm hover:border-[#FBE02E]/50"
                   placeholder="tu@email.com"
                 />
               </div>
@@ -71,7 +71,7 @@ export default function LoginPage() {
                   name="password"
                   type="password"
                   required
-                  className="block w-full rounded-xl border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#2E9FFB] focus:ring-[#2E9FFB] sm:text-sm transition-all shadow-sm hover:border-[#2E9FFB]/50"
+                  className="block w-full rounded-xl border-slate-200 px-4 py-3 text-slate-900 placeholder-slate-400 focus:border-[#FBE02E] focus:ring-[#FBE02E] sm:text-sm transition-all shadow-sm hover:border-[#FBE02E]/50"
                   placeholder="••••••••"
                 />
               </div>
@@ -80,7 +80,7 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={isPending}
-              className="group relative flex w-full justify-center rounded-xl bg-[#2E9FFB] px-4 py-3 text-sm font-bold text-white shadow-lg shadow-[#2E9FFB]/30 transition-all hover:bg-[#2E9FFB]/90 hover:shadow-[#2E9FFB]/50 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#2E9FFB] focus:ring-offset-2 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0"
+              className="group relative flex w-full justify-center rounded-xl bg-[#FBE02E] px-4 py-3 text-sm font-bold text-slate-900 shadow-lg shadow-[#FBE02E]/30 transition-all hover:bg-[#FBE02E]/90 hover:shadow-[#FBE02E]/50 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#FBE02E] focus:ring-offset-2 disabled:bg-slate-300 disabled:cursor-not-allowed disabled:shadow-none disabled:translate-y-0"
             >
               {isPending ? 'Ingresando...' : 'Ingresar'}
               {!isPending && <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />}
@@ -88,7 +88,7 @@ export default function LoginPage() {
 
             <div className="text-center text-sm">
               <span className="text-slate-500">¿No tienes cuenta? </span>
-              <Link href="/register" className="font-bold text-[#2E9FFB] hover:text-[#2E9FFB]/80 transition-colors">
+              <Link href="/register" className="font-bold text-[#FBE02E] hover:text-[#FBE02E]/80 transition-colors">
                 Regístrate aquí
               </Link>
             </div>

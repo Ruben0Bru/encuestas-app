@@ -1,6 +1,6 @@
 import { createClient } from '@/utils/supabase/server'
 import { GraduationCap, User, BookOpen } from 'lucide-react'
-import EnrollCourseForm from '../EnrollCourseForm' // Importamos el form que ya existe
+import EnrollCourseForm from '../EnrollCourseForm'
 
 export default async function StudentCoursesPage() {
   const supabase = await createClient()
@@ -26,7 +26,7 @@ export default async function StudentCoursesPage() {
       
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-200 pb-8">
         <div className="flex items-center gap-3">
-            <div className="p-3 bg-indigo-50 text-indigo-600 rounded-xl">
+            <div className="p-3 bg-[#FBE02E]/10 text-[#FBE02E] rounded-xl">
                 <GraduationCap className="h-8 w-8" />
             </div>
             <div>
@@ -52,7 +52,7 @@ export default async function StudentCoursesPage() {
             </div>
         ) : (
             enrollments.map((item: any) => (
-                <div key={item.course.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-indigo-100 transition-all group">
+                <div key={item.course.id} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm hover:shadow-md hover:border-[#FBE02E]/50 transition-all group">
                     <div className="flex justify-between items-start mb-4">
                         <span className="inline-flex items-center rounded-lg bg-slate-100 px-2.5 py-1 text-xs font-bold text-slate-500">
                             {item.course.access_code}
@@ -62,7 +62,7 @@ export default async function StudentCoursesPage() {
                         </span>
                     </div>
                     
-                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-indigo-600 transition-colors">
+                    <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-[#FBE02E] transition-colors">
                         {item.course.name}
                     </h3>
                     <p className="text-sm text-slate-500 line-clamp-2 mb-4 h-10">

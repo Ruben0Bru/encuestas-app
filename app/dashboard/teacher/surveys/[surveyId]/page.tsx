@@ -141,7 +141,8 @@ export default async function SurveyPage({ params, searchParams }: PageProps) {
                 <SurveyControls 
                     surveyId={survey.id} 
                     isActive={survey.is_active} 
-                    pin={survey.access_pin} 
+                    pin={survey.access_pin}
+                    questions={questions}
                 />
             </div>
         </div>

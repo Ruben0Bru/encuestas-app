@@ -44,11 +44,6 @@ export default async function CourseStatsPage({ params }: PageProps) {
         .in('topic_id', topicIds)
     
     surveyIds = surveys?.map(s => s.id) || []
-    
-    // Enriquecer el mapa de temas para saber qué encuesta es de qué tema
-    surveys?.forEach(s => {
-        // Un truco: Guardamos también el nombre del tema en la encuesta si quisiéramos
-    })
   }
 
   // C. Obtener todos los INTENTOS de esas encuestas
@@ -74,8 +69,6 @@ export default async function CourseStatsPage({ params }: PageProps) {
     // Unir nombres a los intentos
     attempts = attempts.map(att => {
         const student = profiles?.find(p => p.id === att.student_id)
-        // Buscamos a qué tema pertenece esta encuesta (requiere un paso extra de cruce)
-        // Para simplificar: En el paso B debimos guardar la relación SurveyID -> TopicID
         return {
             ...att,
             studentName: student?.full_name || 'Anónimo'
@@ -84,8 +77,6 @@ export default async function CourseStatsPage({ params }: PageProps) {
   }
 
   // --- RE-ENRIQUECIMIENTO DE DATOS (Relación Survey -> Topic) ---
-  // Necesitamos saber de qué tema es cada intento para el gráfico de "Fortalezas"
-  // Hacemos una consulta rápida de todas las encuestas involucradas
   const { data: allSurveys } = await supabase
     .from('surveys')
     .select('id, topic_id')
@@ -146,7 +137,6 @@ export default async function CourseStatsPage({ params }: PageProps) {
 
   return (
     <div className="space-y-8 animate-fade-in pb-20">
-      {/* ... (El resto del JSX es idéntico al anterior, solo cambia la lógica de arriba) ... */}
       <div>
         <Link 
           href={`/dashboard/teacher/courses/${courseId}`} 
@@ -170,8 +160,8 @@ export default async function CourseStatsPage({ params }: PageProps) {
             <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2">Promedio de Clase</p>
             <div className="flex items-end gap-3">
                 <span className={clsx("text-5xl font-black", 
-                    courseAverage >= 80 ? "text-green-500" : 
-                    courseAverage >= 60 ? "text-[#2E9FFB]" : "text-orange-500"
+                    courseAverage >= 80 ? "text-[#2EFB87]" : 
+                    courseAverage >= 60 ? "text-[#2E9FFB]" : "text-[#FB2E80]"
                 )}>
                     {courseAverage}%
                 </span>
@@ -180,17 +170,17 @@ export default async function CourseStatsPage({ params }: PageProps) {
         </div>
 
         <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden group">
-            <div className="absolute right-0 top-0 opacity-10 p-4"><TrendingUp className="h-16 w-16 text-green-500" /></div>
-            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2"><TrendingUp className="h-4 w-4 text-green-500" /> Fortaleza</p>
+            <div className="absolute right-0 top-0 opacity-10 p-4"><TrendingUp className="h-16 w-16 text-[#2EFB87]" /></div>
+            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2"><TrendingUp className="h-4 w-4 text-[#2EFB87]" /> Fortaleza</p>
             <h3 className="text-xl font-bold text-slate-800 truncate" title={bestTopic?.name}>{bestTopic?.name || "N/A"}</h3>
-            <p className="text-sm text-green-600 font-bold mt-1">{bestTopic ? `${bestTopic.average}% de aciertos` : "-"}</p>
+            <p className="text-sm text-[#2EFB87] font-bold mt-1">{bestTopic ? `${bestTopic.average}% de aciertos` : "-"}</p>
         </div>
 
         <div className="bg-white p-6 rounded-3xl border border-slate-100 shadow-sm relative overflow-hidden">
-            <div className="absolute right-0 top-0 opacity-10 p-4"><TrendingDown className="h-16 w-16 text-red-500" /></div>
-            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2"><TrendingDown className="h-4 w-4 text-red-500" /> Debilidad</p>
+            <div className="absolute right-0 top-0 opacity-10 p-4"><TrendingDown className="h-16 w-16 text-[#FB2E80]" /></div>
+            <p className="text-sm font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center gap-2"><TrendingDown className="h-4 w-4 text-[#FB2E80]" /> Debilidad</p>
             <h3 className="text-xl font-bold text-slate-800 truncate" title={worstTopic?.name}>{worstTopic?.name || "N/A"}</h3>
-            <p className="text-sm text-red-500 font-bold mt-1">{worstTopic ? `${worstTopic.average}% de aciertos` : "-"}</p>
+            <p className="text-sm text-[#FB2E80] font-bold mt-1">{worstTopic ? `${worstTopic.average}% de aciertos` : "-"}</p>
         </div>
       </div>
 
@@ -217,7 +207,7 @@ export default async function CourseStatsPage({ params }: PageProps) {
                         <div key={idx} className="space-y-1">
                             <div className="flex justify-between text-sm font-medium"><span className="text-slate-700">{t.name}</span><span className="text-slate-500">{t.average}%</span></div>
                             <div className="h-2 w-full bg-slate-100 rounded-full overflow-hidden">
-                                <div className={clsx("h-full rounded-full", t.average >= 80 ? "bg-green-500" : t.average >= 60 ? "bg-[#2E9FFB]" : "bg-red-500")} style={{ width: `${t.average}%` }}></div>
+                                <div className={clsx("h-full rounded-full", t.average >= 80 ? "bg-[#2EFB87]" : t.average >= 60 ? "bg-[#2E9FFB]" : "bg-[#FB2E80]")} style={{ width: `${t.average}%` }}></div>
                             </div>
                         </div>
                     ))

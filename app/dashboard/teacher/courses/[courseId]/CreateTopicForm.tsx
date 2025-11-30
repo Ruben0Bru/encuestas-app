@@ -24,7 +24,7 @@ export default function CreateTopicForm({ courseId }: { courseId: string }) {
           name="name" 
           placeholder="Nuevo tema (ej: Unidad 1)..." 
           required
-          className="block w-full rounded-xl border-slate-200 py-3 px-4 text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-[#2E9FFB] focus:ring-2 focus:ring-[#2E9FFB] sm:text-sm transition-all"
+          className="block w-full rounded-xl border-slate-200 py-3 px-4 text-slate-900 shadow-sm placeholder:text-slate-400 focus:border-[#FBE02E] focus:ring-2 focus:ring-[#FBE02E] sm:text-sm transition-all"
         />
         {state?.error && <p className="text-xs text-[#FB2E80] mt-2 font-medium">{state.error}</p>}
       </div>
@@ -32,7 +32,7 @@ export default function CreateTopicForm({ courseId }: { courseId: string }) {
       <button 
         type="submit" 
         disabled={isPending}
-        className="inline-flex items-center gap-2 rounded-xl bg-[#2E9FFB] px-5 py-3 text-sm font-bold text-white shadow-lg shadow-[#2E9FFB]/30 hover:bg-[#2E9FFB]/90 hover:shadow-[#2E9FFB]/50 hover:-translate-y-0.5 disabled:opacity-50 disabled:shadow-none disabled:translate-y-0 transition-all"
+        className="inline-flex items-center gap-2 rounded-xl bg-[#FBE02E] px-5 py-3 text-sm font-bold text-slate-900 shadow-lg shadow-[#FBE02E]/30 hover:bg-[#FBE02E]/90 hover:shadow-[#FBE02E]/50 hover:-translate-y-0.5 disabled:opacity-50 disabled:shadow-none disabled:translate-y-0 transition-all"
       >
         <Plus className="h-5 w-5" />
         {isPending ? '...' : 'Agregar'}

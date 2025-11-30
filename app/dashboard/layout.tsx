@@ -42,11 +42,11 @@ export default async function DashboardLayout({
             
             {/* Logo */}
             <div className="flex items-center gap-3 group">
-              <div className="bg-gradient-to-tr from-[#2E9FFB] to-blue-600 p-2.5 rounded-xl text-white shadow-lg shadow-blue-500/30 group-hover:shadow-blue-500/40 group-hover:scale-105 transition-all duration-300">
+              <div className="bg-gradient-to-tr from-[#FBE02E] to-yellow-500 p-2.5 rounded-xl text-slate-900 shadow-lg shadow-yellow-400/30 group-hover:shadow-yellow-400/40 group-hover:scale-105 transition-all duration-300">
                  <BookOpen className="h-5 w-5" />
               </div>
-              <Link href="/" className="text-xl font-extrabold tracking-tight text-slate-800 hidden sm:block group-hover:text-[#2E9FFB] transition-colors">
-                PPEAI
+              <Link href="/" className="text-xl font-extrabold tracking-tight text-slate-800 hidden sm:block group-hover:text-[#FBE02E] transition-colors">
+                PEAI
               </Link>
             </div>
 
@@ -64,9 +64,9 @@ export default async function DashboardLayout({
                     <span className="hidden md:inline">Historial</span>
                   </Link>
                   <Link href="/dashboard/student/courses" className="px-3 py-2 text-sm font-bold text-slate-600 hover:text-[#2E9FFB] hover:bg-slate-50 rounded-lg transition-colors flex items-center gap-2">
-  <GraduationCap className="h-4 w-4" /> 
-  <span className="hidden md:inline">Cursos</span>
-</Link>
+                    <GraduationCap className="h-4 w-4" /> 
+                    <span className="hidden md:inline">Cursos</span>
+                  </Link>
                   <Link href="/dashboard/student/profile" className="px-4 py-2 text-sm font-bold text-slate-600 hover:text-[#2E9FFB] hover:bg-white hover:shadow-sm rounded-full transition-all duration-200 flex items-center gap-2">
                     <User className="h-4 w-4" /> 
                     <span className="hidden md:inline">Perfil</span>

@@ -61,7 +61,7 @@ export default async function TeacherDashboard() {
               
               <div className="bg-slate-50/50 px-6 py-4 flex items-center justify-between border-t border-slate-100 group-hover:bg-[#2E9FFB]/5 transition-colors">
                 <div className="flex items-center gap-2 text-sm font-medium text-slate-600">
-                  <Users className="h-4 w-4 text-yellow-400" />
+                  <Users className="h-4 w-4 text-[#FB2E80]" />
                   <span>{course.enrollments[0]?.count || 0} estudiantes</span>
                 </div>
                 <div className="flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-sm text-slate-400 group-hover:text-[#2E9FFB] group-hover:scale-110 transition-all">

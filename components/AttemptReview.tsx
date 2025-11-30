@@ -18,7 +18,7 @@ export default function AttemptReview({ questions, myAnswersMap }: { questions: 
             className={clsx(
                 "flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold transition-all border",
                 showCorrect 
-                    ? "bg-indigo-50 text-indigo-600 border-indigo-200" 
+                    ? "bg-[#2E9FFB]/10 text-[#2E9FFB] border-[#2E9FFB]/20" 
                     : "bg-white text-slate-600 border-slate-200 hover:bg-slate-50"
             )}
         >
@@ -46,12 +46,12 @@ export default function AttemptReview({ questions, myAnswersMap }: { questions: 
                     <div className={clsx("p-6 flex gap-4 border-b transition-colors duration-300", 
                         // Si revelamos correctas, el header se mantiene neutral o verde si acertó.
                         // Si NO revelamos, se muestra rojo si falló.
-                        isUserCorrect ? "bg-green-50/50 border-green-100" : 
-                        (isAnswered && !showCorrect) ? "bg-red-50/50 border-red-100" : // Solo rojo si no ha revelado la verdad (opcional)
+                        isUserCorrect ? "bg-[#2EFB87]/10 border-[#2EFB87]/20" : 
+                        (isAnswered && !showCorrect) ? "bg-[#FB2E80]/5 border-[#FB2E80]/10" : // Solo rojo si no ha revelado la verdad (opcional)
                         "bg-slate-50 border-slate-100"
                     )}>
                         <div className={clsx("h-8 w-8 rounded-lg flex items-center justify-center flex-shrink-0 font-bold transition-colors duration-300",
-                             isUserCorrect ? "bg-green-100 text-green-700" :
+                             isUserCorrect ? "bg-[#2EFB87] text-slate-900" :
                              isAnswered ? "bg-slate-200 text-slate-500" : "bg-slate-200 text-slate-500"
                         )}>
                             {idx + 1}
@@ -73,19 +73,19 @@ export default function AttemptReview({ questions, myAnswersMap }: { questions: 
                             if (isSelected) {
                                 if (isCorrect) {
                                     // Eligió bien
-                                    styles = "border-green-200 bg-green-50 text-green-800 font-medium ring-1 ring-green-200 opacity-100"
-                                    icon = <CheckCircle2 className="h-5 w-5 text-green-600" />
+                                    styles = "border-[#2EFB87] bg-[#2EFB87]/10 text-slate-900 font-bold ring-1 ring-[#2EFB87] opacity-100"
+                                    icon = <CheckCircle2 className="h-5 w-5 text-[#2EFB87]" />
                                 } else {
                                     // Eligió mal
-                                    styles = "border-red-200 bg-red-50 text-red-800 font-medium ring-1 ring-red-200 opacity-100"
-                                    icon = <XCircle className="h-5 w-5 text-red-500" />
+                                    styles = "border-[#FB2E80] bg-[#FB2E80]/10 text-[#FB2E80] font-bold ring-1 ring-[#FB2E80] opacity-100"
+                                    icon = <XCircle className="h-5 w-5 text-[#FB2E80]" />
                                 }
                             }
 
                             // Caso B: Es la correcta, pero el usuario NO la eligió (Y activó "Revelar")
                             if (showCorrect && isCorrect && !isSelected) {
-                                styles = "border-green-200 bg-white text-green-700 font-medium ring-1 ring-green-200 border-dashed opacity-100"
-                                icon = <CheckCircle2 className="h-5 w-5 text-green-600 opacity-50" />
+                                styles = "border-[#2EFB87] bg-white text-[#2EFB87] font-bold ring-1 ring-[#2EFB87] border-dashed opacity-100"
+                                icon = <CheckCircle2 className="h-5 w-5 text-[#2EFB87] opacity-50" />
                             }
 
                             return (
@@ -98,7 +98,7 @@ export default function AttemptReview({ questions, myAnswersMap }: { questions: 
                                             </span>
                                         )}
                                         {showCorrect && isCorrect && !isSelected && (
-                                            <span className="text-[10px] uppercase font-bold bg-green-100 text-green-700 px-2 py-0.5 rounded">
+                                            <span className="text-[10px] uppercase font-bold bg-[#2EFB87]/20 text-slate-900 px-2 py-0.5 rounded">
                                                 Correcta
                                             </span>
                                         )}

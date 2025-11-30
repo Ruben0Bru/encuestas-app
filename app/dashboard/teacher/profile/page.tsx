@@ -17,7 +17,7 @@ export default async function TeacherProfilePage() {
     <div className="max-w-4xl mx-auto space-y-8 animate-fade-in">
       
       {/* Header con Gradiente */}
-      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#2E9FFB] to-blue-600 p-8 text-white shadow-xl shadow-blue-500/20">
+      <div className="relative overflow-hidden rounded-3xl bg-gradient-to-r from-[#FBE02E] to-yellow-500 p-8 text-slate-900 shadow-xl shadow-[#FBE02E]/20">
         <div className="absolute top-0 right-0 -mt-4 -mr-4 h-32 w-32 rounded-full bg-white/10 blur-2xl"></div>
         <div className="absolute bottom-0 left-0 -mb-4 -ml-4 h-32 w-32 rounded-full bg-white/10 blur-2xl"></div>
         

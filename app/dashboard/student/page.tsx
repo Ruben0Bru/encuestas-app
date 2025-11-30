@@ -110,10 +110,10 @@ export default async function StudentDashboard() {
 
                 <div className="grid gap-3">
                     {pendingSurveys.map((survey) => (
-                        <div key={survey.id} className="bg-white/10 backdrop-blur-md border border-white/20 p-4 rounded-xl flex items-center justify-between hover:bg-white/20 transition-colors">
+                        <div key={survey.id} className="bg-white/90 backdrop-blur-md border border-slate-200 p-4 rounded-xl flex items-center justify-between hover:bg-white transition-colors shadow-sm">
                             <div>
                                 <h3 className="font-bold text-lg">{survey.title}</h3>
-                                <p className="text-sm text-indigo-100">
+                                <p className="text-sm text-slate-600">
                                     {survey.topics.courses.name} • {survey.topics.name}
                                 </p>
                             </div>
